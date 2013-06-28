@@ -64,8 +64,6 @@
     	</form> 
     </div>
     
-    
-    
     <?php
 	require_once('./lib/sections/footer.php');
 ?>  

@@ -260,11 +260,7 @@ if (isset($_POST['step-3'])) {
             	<label for="phone_number"><strong>Phone Number</strong></label><br />          
                 <input id="phone_number" type="text" name="phone_number">
             </div>
-                    
-
-                    
-                   
-			
+                    	
 	
 	<br clear="all" />
 	
