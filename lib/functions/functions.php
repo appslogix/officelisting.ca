@@ -608,7 +608,7 @@ function suspendBuilding($id)
 	$sql = "SELECT id,active FROM buildings WHERE id = '".$id."'"; 
 	$res = mysql_query($sql);
 	if ($res){
-		$update = "UPDATE building SET active = 0 WHERE id = '".$id."'";
+		$update = "UPDATE buildings SET active = 0 WHERE id = '".$id."'";
 		$result = mysql_query($update);
 			if ($result)
 				return 99;
