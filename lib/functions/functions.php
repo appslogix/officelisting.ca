@@ -74,7 +74,7 @@ function logoff()
 		}
 		
 		//redirect the user to the default "logout" page
-  header("Location: log_off.php");
+  header("Location: ../login.php");
 }
 
 //*******************************site access**************************
