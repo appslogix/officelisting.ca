@@ -35,6 +35,12 @@ $action='';
 
 </head>
 <body>
+    <?php 
+		include('../lib/sections/user_main_nav.php');
+		?>
 	<div class="message" align="center">You have been logged out. <a href="../login.php">Click here</a> to log in.</div>
+                <?php
+	require_once('../lib/sections/footer.php');
+?>
 </body>
 </html>

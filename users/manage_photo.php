@@ -38,7 +38,10 @@ $uid = $getuser[0]['id'];
 </head>
 
 <body>
-	<div align="right"><a href="index.php">Home</a> | <? if (!empty($getuser[0]['thumb_path'])){echo "<a href='manage_photo.php'>Manage My Photo</a> | ";} else {echo "<a href='upload_photo.php'>Upload Photo</a> | ";} ?><a href="change_pass.php">change password</a> | <a href="edit_profile.php">Edit Profile</a> | <a href="log_off.php?action=logoff">sign out</a></div></td>
+	    <?php 
+		include('../lib/sections/user_main_nav.php');
+		?>
+        
 	<p><?php if(empty($getuser[0]['first_name']) || empty($getuser[0]['last_name'])){echo $getuser[0]['username'];} else {echo $getuser[0]['first_name']." ".$getuser[0]['last_name'];} ?>, manage your photo.</p>
 		<?php 
 			if ( isset( $error ) ) { echo '<p align="center"><span style="color:#f40000; font-weight:bold;">' . $error . '</span></p>';}
@@ -60,5 +63,8 @@ $uid = $getuser[0]['id'];
 					echo "</tr>"; 
 				echo "</table>";
 			?>
+                        <?php
+	require_once('../lib/sections/footer.php');
+?>
 </body>
 </html>
