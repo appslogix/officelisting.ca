@@ -64,7 +64,7 @@ if (isset($_POST['step-3'])) {
 		<?php 
 		include('../lib/sections/user_main_nav.php');
 		?>
-	<hr/>
+	
 	<h3>List Space</h3>
     
     
