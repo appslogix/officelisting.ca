@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 28, 2013 at 07:06 PM
+-- Generation Time: Jun 30, 2013 at 12:07 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.6
 
@@ -543,6 +543,27 @@ INSERT INTO `dialing_code` VALUES(246, 'ZW', 'Zimbabwe', 263);
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `favourites`
+--
+
+CREATE TABLE `favourites` (
+  `favourite_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `space_id` int(11) NOT NULL,
+  PRIMARY KEY (`favourite_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `favourites`
+--
+
+INSERT INTO `favourites` VALUES(1, 5, 1);
+INSERT INTO `favourites` VALUES(2, 5, 5);
+INSERT INTO `favourites` VALUES(10, 1, 11);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `site_settings`
 --
 
@@ -567,6 +588,7 @@ INSERT INTO `site_settings` VALUES(1, 'localhost/officelisting.ca', 'patrick@app
 
 CREATE TABLE `spaces` (
   `space_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `building_id` int(11) NOT NULL,
   `suite_number` int(11) NOT NULL,
   `square_footage` int(11) NOT NULL,
@@ -581,19 +603,22 @@ CREATE TABLE `spaces` (
   `image` varchar(128) NOT NULL,
   `space_active` int(1) NOT NULL,
   PRIMARY KEY (`space_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `spaces`
 --
 
-INSERT INTO `spaces` VALUES(1, 1, 342, 1500, 'Long term', 'This is a recently renovated units.', 'Patrick', 'Ejelle-Ndille', 'patrickndille@gmail.com', 2147483647, 3000.00, 0, '8000983c69584c67ee55e71ff37ee056ecead0cb.jpg', 1);
-INSERT INTO `spaces` VALUES(3, 3, 501, 1800, 'Short Term', 'this is a short term lease', 'Olivier', 'Kingston', 'olivier@mail.com', 2147483647, 2500.00, 0, '', 1);
-INSERT INTO `spaces` VALUES(5, 3, 343, 898, 'Immediate', 'immediate for rent by landlord', 'Sanili', 'Ngupa', 'ngupa@gmail.com', 2147483647, 2000.00, 0, '', 1);
-INSERT INTO `spaces` VALUES(6, 3, 9999, 9999, 'terms', 'descriptions', 'paddys', 'escobas', 'escobas@paddymail.com', 2147483647, 9000.00, 0, '', 1);
-INSERT INTO `spaces` VALUES(7, 3, 4013, 3900, 'Long Term', 'This is an office that was listed by a user', 'Esther', 'Fletcher', 'esther@fletcher.com', 2147483647, 4000.00, 0, '', 1);
-INSERT INTO `spaces` VALUES(8, 3, 701, 2100, 'Long Term', 'This is a newly renovated office that we are looking to get someone to  rent for 1400 a month. Let me know if you are interested', 'Donald', 'Swanson', 'do_swan@gmail.com', 647, 1400.00, 0, '', 1);
-INSERT INTO `spaces` VALUES(9, 3, 69, 1000, 'Monthly', 'This is another test building with a plus....', 'Patrick', 'Ejelle-Ndille', 'patrick@appslogix.ca', 647, 1450.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(1, 0, 1, 342, 1500, 'Long term', 'This is a recently renovated units.', 'Patrick', 'Ejelle-Ndille', 'patrickndille@gmail.com', 2147483647, 3000.00, 0, '8000983c69584c67ee55e71ff37ee056ecead0cb.jpg', 1);
+INSERT INTO `spaces` VALUES(3, 0, 3, 501, 1800, 'Short Term', 'this is a short term lease', 'Olivier', 'Kingston', 'olivier@mail.com', 2147483647, 2500.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(5, 0, 3, 343, 898, 'Immediate', 'immediate for rent by landlord', 'Sanili', 'Ngupa', 'ngupa@gmail.com', 2147483647, 2000.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(6, 0, 3, 9999, 9999, 'terms', 'descriptions', 'paddys', 'escobas', 'escobas@paddymail.com', 2147483647, 9000.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(7, 0, 3, 4013, 3900, 'Long Term', 'This is an office that was listed by a user', 'Esther', 'Fletcher', 'esther@fletcher.com', 2147483647, 4000.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(8, 0, 3, 701, 2100, 'Long Term', 'This is a newly renovated office that we are looking to get someone to  rent for 1400 a month. Let me know if you are interested', 'Donald', 'Swanson', 'do_swan@gmail.com', 647, 1400.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(9, 0, 3, 69, 1000, 'Monthly', 'This is another test building with a plus....', 'Patrick', 'Ejelle-Ndille', 'patrick@appslogix.ca', 647, 1450.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(10, 0, 3, 888, 2570, 'Long term', 'This is gross. Lol', 'Belinda', 'Koskovsky', 'belkoskov@gmail.com', 987654321, 7000.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(11, 0, 3, 112, 1112, 'Daily', 'Created from user account', 'Pablo', 'Escobar', 'pablo@escobar.com', 2147483647, 9000.00, 0, '', 1);
+INSERT INTO `spaces` VALUES(13, 5, 3, 1800, 2330, 'Monthly', 'This is a large office space in a very prestigious building. You will have the opportunity to be in the mist of several large companies like Verision, IBM, Intel, MicroSoft etc.', 'Patrick', 'Ndille', 'patrick@appslogix.ca', 2147483647, 4525.00, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -603,7 +628,7 @@ INSERT INTO `spaces` VALUES(9, 3, 69, 1000, 'Monthly', 'This is another test bui
 
 CREATE TABLE `users` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
-  `username` varchar(8) NOT NULL,
+  `username` varchar(9) NOT NULL,
   `password` varchar(32) NOT NULL,
   `temp_pass` varchar(32) NOT NULL,
   `temp_pass_active` int(1) NOT NULL,
@@ -622,12 +647,13 @@ CREATE TABLE `users` (
   `reg_date` varchar(45) NOT NULL,
   `last_active` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` VALUES(1, 'user1', '317da97d438875c141a4b5f9f67dfdd0', 'd0ygOllq', 0, 'John', 'Doe', 'test@localhost', 254, 723456789, 'Kigali', 'Afghanistan', 'pics/5948flexapp-screenshot_thumb.png', 'pics/5948flexapp-screenshot.png', 1, 2, '', 'Wednesday, Sep 28, 2011, 8:47 am', '');
+INSERT INTO `users` VALUES(1, 'user1', '317da97d438875c141a4b5f9f67dfdd0', 'd0ygOllq', 0, 'John', 'Doe', 'test@localhost', 254, 723456789, 'Kigali', 'Afghanistan', '', '', 1, 2, '', 'Wednesday, Sep 28, 2011, 8:47 am', '');
 INSERT INTO `users` VALUES(2, 'admin', '317da97d438875c141a4b5f9f67dfdd0', '7XxhOeEU', 1, 'Site', 'Admin', 'patrick@appslogix.ca', 1, 2147483647, 'Toronto', 'Canada', '', '', 1, 1, '', '', '');
 INSERT INTO `users` VALUES(3, 'user2', '2c5c4e7fd92598deeecbcd8da0edb373', '', 0, 'Jane', 'Doe', 'user2@mail.com', 0, 0, '', 'Kenya', '', '', 2, 2, '', 'Wednesday, Dec 21, 2011, 6:06 am', '');
+INSERT INTO `users` VALUES(5, 'appslogix', '996da2ce0ab38466500e7a121220d3e6', '', 0, '', '', 'info@appslogix.ca', 0, 0, '', '', '', '', 1, 2, 'fb41d70a239d59a569b2800da2cb615f', 'Saturday, Jun 29, 2013, 9:40 am', '');
