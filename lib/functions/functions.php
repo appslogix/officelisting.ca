@@ -130,6 +130,7 @@ function checkLogin ( $levels )
 		
 		if ( $access == FALSE ) {
 			header("Location: login.php");
+			header("Location: ../login.php");
 		}		
 }
 	
