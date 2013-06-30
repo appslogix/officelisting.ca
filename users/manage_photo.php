@@ -58,7 +58,7 @@ $uid = $getuser[0]['id'];
 									echo "<a href='update_photo.php?id=".$row['id']."'>Change Photo</a> | ";
 									echo "<a href='process_photo.php?id=".$row['id']."&action=delete'>Delete Photo</a></p>";
 								echo "</td>";
-								} else {echo"<td><img src='pics/no_image.gif' width='150' height='100' /></td>";}
+								} else {echo"<td><img src='pics/no_image.png' width='150' height='150' /></td>";}
 							}	 
 					echo "</tr>"; 
 				echo "</table>";
