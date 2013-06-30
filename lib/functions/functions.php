@@ -129,7 +129,6 @@ function checkLogin ( $levels )
 		}
 		
 		if ( $access == FALSE ) {
-			header("Location: login.php");
 			header("Location: ../login.php");
 		}		
 }
@@ -647,6 +646,21 @@ function deleteSpace($id)
 	} else return 2;	
 }
 
+
+//----------Function for deleting listing by user----------
+function deleteListing($space_id, $user_id)
+{
+	$sql = "SELECT * FROM spaces WHERE space_id = '".$space_id."' AND user_id = '".$user_id."'";
+	$res = mysql_query($sql);
+	if ($res){
+		$del = "DELETE FROM spaces space_id = '".$space_id."' AND user_id = '".$user_id."'"; 
+		$result = mysql_query($del);
+			if($result)
+				return 99;
+					return 1;
+	} else return 2;	
+}
+
 //----------Function for suspending space by admin----------
 function suspendSpace($id)
 {
@@ -679,6 +693,19 @@ function unsuspendSpace($id)
 
 
 
+//----------Function for deleting user favourite ----------
+function deleteFavourite($favourite_id)
+{
+	$sql = "SELECT * FROM favourites WHERE favourite_id = '".$favourite_id."'";
+	$res = mysql_query($sql);
+	if ($res){
+		$del = "DELETE FROM favourites WHERE favourite_id = '".$favourite_id."'"; 
+		$result = mysql_query($del);
+			if($result)
+				return 99;
+					return 1;
+	} else return 2;	
+}
 
 
 
@@ -1252,10 +1279,10 @@ function displayUserImg($id)
 	$row = mysql_fetch_assoc($res);
 	
 	if (!empty($row['thumb_path'])){
-		echo "<img src='".$row['thumb_path']."' width='150' height='100' border='0' alt='' hspace='2' />";
+		echo "<img src='".$row['thumb_path']."' width='150' height='150' border='0' alt='' hspace='2' />";
 	} else {
 		//display a default image if user image does not exist
-		echo "<img src='pics/no_image.gif' width='150' height='100' border='0' alt='' hspace='2' />";
+		echo "<img src='pics/no_image.png' width='150' height='150' border='0' alt='' hspace='2' />";
 	}
 }
 
