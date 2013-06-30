@@ -43,7 +43,7 @@
 				<label for="username">Username:</label>
 			</td>
 			<td>
-			<input onclick="this.value='';" name="username" type="text" size="25" maxlength="8" value="<?php if(isset($_POST['username'])){echo $_POST['username'];}?>"/>
+			<input onclick="this.value='';" name="username" type="text" size="25" maxlength="15" value="<?php if(isset($_POST['username'])){echo $_POST['username'];}?>"/>
 			</td>
 		  </tr>
 		  <tr>
