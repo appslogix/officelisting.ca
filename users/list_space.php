@@ -7,6 +7,7 @@
 
 if (isset($_POST['step-3'])) {
 	// Make the extra variable associations:
+		$user_id = $getuser[0]['id'];
 		$building_id = $_POST['building_id'];
 		$suite_number = $_POST['suite_number'];
 		$square_footage = $_POST['square_footage'];
@@ -19,7 +20,7 @@ if (isset($_POST['step-3'])) {
 		$monthly_rents = $_POST['monthly_rents'];
 		
 		// Write query to add space to database
-		$sql = "INSERT INTO spaces (building_id, suite_number, square_footage, lease_term, description, first_name, last_name, email, phone_number, monthly_rents) VALUES ('".$building_id."', '".$suite_number."', '".$square_footage."', '".$lease_term."', '".$description."', '".$first_name."', '".$last_name."', '".$email."', '".$phone_number."', '".$monthly_rents."')";
+		$sql = "INSERT INTO spaces (user_id, building_id, suite_number, square_footage, lease_term, description, first_name, last_name, email, phone_number, monthly_rents) VALUES ('".$user_id."', '".$building_id."', '".$suite_number."', '".$square_footage."', '".$lease_term."', '".$description."', '".$first_name."', '".$last_name."', '".$email."', '".$phone_number."', '".$monthly_rents."')";
 		// run add space query
 		$res = mysql_query($sql);
 		
