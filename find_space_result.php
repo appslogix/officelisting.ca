@@ -100,7 +100,8 @@
 <span><?=$address?></span><br />
 <span>Suite: <?=$row['suite_number']?></span><br />
 <span>Square Footage: <?=$row['square_footage']?></span><br />
-<span>Monthly Rents: <?=$row['monthly_rents']?></span>
+<span>Monthly Rents: <?=$row['monthly_rents']?></span><br />
+<a href="space_detail.php?id=<?=$row['space_id']?>">View Details</a>
 </p>
 
 </div>
