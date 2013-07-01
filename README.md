@@ -13,3 +13,4 @@ OfficeListing.CA 1.0.1, changes to add Geocomplete Version 1.4 a jQuery Geocodin
 
 1. Google Maps [Geocoding] API - https://code.google.com/apis/maps/documentation/javascript/geocoding.html
 2. Google Maps [Places Autocomplete] Web Services - https://code.google.com/apis/maps/documentation/javascript/places.html#places_autocomplete
+

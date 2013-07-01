@@ -32,30 +32,33 @@ if (isset($_POST['step-3'])) {
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<!DOCTYPE html>
+<html>
 <head>
 	<title>Home Page</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
+	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-    
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-	<script src="./js/address_geocoder.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="../js/script.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-	
-			$('#addspaceForm').submit(function(e) {
-				addspace();
-				e.preventDefault();	
-			});	
-		});
-	</script>
+
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+    <script src="./plugins/geocomplete/jquery.geocomplete.js"></script>
+
+    <script>
+      $(function(){
+        $("#geocomplete").geocomplete({
+          map: ".map_canvas",
+          details: "form",
+          types: ["geocode", "establishment"],
+        });
+
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        });
+      });
+    </script>
+
     
 </head>
 <body>
@@ -82,17 +85,18 @@ if (isset($_POST['step-3'])) {
     
         
             <fieldset><legend>Step 1. Find the Building Location.</legend>
+            
+             <div class="map_canvas"></div><br />
                 
                 <div class="field">
-                    <label for="address"><strong>Address</strong></label><br>
-                    <input id="address" type="text" name="address" placeholder="Enter a location" autocomplete="off" size="87" <?php if (isset($_POST['address'])) { print 'value="'.$_POST['address'].'"'; }?>>
+                    <label for="geocomplete"><strong>Address</strong></label><br>
+                    <input id="geocomplete" type="text" name="address" placeholder="Type in an address" autocomplete="off" size="87" value="<?php if (isset($_POST['address'])) { print $_POST['address']; }?>">
                 </div>
                     
             	<br clear="all" />
             
                 <div class="field">
                     <input type="submit" value="Find"  name="findbuilding" />
-                    <img id="loading" src="../images/loading.gif" alt="Updating.." />
                 </div>
             
             
