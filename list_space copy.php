@@ -44,10 +44,7 @@ if (isset($_POST['step-3'])) {
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <script src="./plugins/geocomplete/jquery.geocomplete.js"></script>
-    <script src="./plugins/geocomplete/examples/logger.js"></script>
-<?php
-	 if (!isset($_GET['step']) || ($_GET['step'] == 1)) {
-?>
+
     <script>
       $(function(){
         $("#geocomplete").geocomplete({
@@ -61,59 +58,7 @@ if (isset($_POST['step-3'])) {
         });
       });
     </script>
-<?php
-	 }
-?>
 
-<?php
-	if (isset($_GET['step']) && (($_GET['step'] == 2)) ) {
-?>
-    <script>
-      $(function(){
-      	$("#geocomplete").geocomplete({
-          map: ".map_canvas",
-		  
-        });
-        
-        $("#geocomplete").geocomplete("find", "<?=$_POST['address'];?>");
-        
-        $("#center").click(function(){
-          var map = $("#geocomplete").geocomplete("map"),
-            center = new google.maps.LatLng(10, 0);
-          
-          map.setCenter(center);
-          map.setZoom(3);
-        });
-      });
-    </script>
-<?php
-	 }
-?>
-
-<?php
-	if (isset($_GET['step']) && (($_GET['step'] == 3)) ) {
-?>
-    <script>
-      $(function(){
-      	$("#geocomplete").geocomplete({
-          map: ".map_canvas",
-		  
-        });
-        
-        $("#geocomplete").geocomplete("find", "<?=$_POST['address'];?>");
-        
-        $("#center").click(function(){
-          var map = $("#geocomplete").geocomplete("map"),
-            center = new google.maps.LatLng(10, 0);
-          
-          map.setCenter(center);
-          map.setZoom(3);
-        });
-      });
-    </script>
-<?php
-	 }
-?>
     
 </head>
 <body>
@@ -141,20 +86,20 @@ if (isset($_POST['step-3'])) {
         
             <fieldset><legend>Step 1. Find the Building Location.</legend>
             
-             
+             <div class="map_canvas"></div><br />
                 
                 <div class="field">
                     <label for="geocomplete"><strong>Address</strong></label><br>
-                    <input id="geocomplete" type="text" name="address" placeholder="Type in the address" autocomplete="off" size="80" value="<?php if (isset($_POST['address'])) { print $_POST['address']; }?>"> <input type="submit" value="Find"  name="findbuilding" />
+                    <input id="geocomplete" type="text" name="address" placeholder="Type in an address" autocomplete="off" size="87" value="<?php if (isset($_POST['address'])) { print $_POST['address']; }?>">
                 </div>
                     
             	<br clear="all" />
             
-                
-                    
-                
+                <div class="field">
+                    <input type="submit" value="Find"  name="findbuilding" />
+                </div>
             
-            <div class="map_canvas"></div>
+            
             </fieldset>
     
     	</form> 
@@ -190,15 +135,16 @@ if (isset($_POST['step-3'])) {
 		<form enctype="multipart/form-data" action="list_space.php?step=3&building_id=<?=$id;?>" method="post" accept-charset="utf-8">
 			<fieldset>
 					<legend>Step 2. Confirm Address</legend>
-					                        <div class="field">
+					
+					 
+                        <div class="field">
                             <label for="address"><strong>Address</strong></label><br />          
-                            <input id="geocomplete" type="text" name="address" value="<?=$address;?>" size="80" placeholder="Type in an address" readonly />
+                            <input type="text" name="address" value="<?=$address;?>" size="87"/>
                         </div>
-                        
-					 <div class="map_canvas"></div>
-                     
-
-                        
+                        <div class="field">
+                            <label for="postal_code"><strong>Postal Code</strong></label><br />          
+                            <input type="text" name="postal_code" value="<?=$postal_code;?>" size="10" />
+                        </div>
                         
                         <div class="field">
                             <label for="description"><strong>Description</strong></label><br /> 
@@ -250,11 +196,9 @@ if (isset($_POST['step-3'])) {
 <form enctype="multipart/form-data" action="list_space.php?step=3&building_id=<?=$id;?>" method="post" accept-charset="utf-8"> 
 	<fieldset>
 			<legend>Step 3. Enter Office Space Details</legend>
-      <input id="geocomplete" type="hidden" name="address" value="<?=$address;?>" size="80" placeholder="Type in an address"  />
-      <div class="map_canvas"></div>
       
                <input type="hidden" name="building_id" value="<?=$id;?>"/>     
-            
+            <h3>Building Information</h3>
             <div class="field"><strong>Address</strong><br />          
                     <span><?=$address;?></span>
                     </div>

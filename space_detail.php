@@ -52,6 +52,32 @@ if(isset($_GET['id'])){
 	<meta name="robots" content="index, follow" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+    
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+    <script src="./plugins/geocomplete/jquery.geocomplete.js"></script>
+    <script src="./plugins/geocomplete/examples/logger.js"></script>
+    
+    <script>
+      $(function(){
+      	$("#geocomplete").geocomplete({
+          map: ".map_canvas",
+		  
+        });
+        
+        $("#geocomplete").geocomplete("find", "<?=$_POST['address'];?>");
+        
+        $("#center").click(function(){
+          var map = $("#geocomplete").geocomplete("map"),
+            center = new google.maps.LatLng(10, 0);
+          
+          map.setCenter(center);
+          map.setZoom(3);
+        });
+      });
+    </script>
+    
 </head>
 <body>
 
@@ -60,6 +86,8 @@ if(isset($_GET['id'])){
 		?>
 	<hr/>
 		<h3>Building Information</h3>
+              <input id="geocomplete" type="hidden" name="address" value="<?=$address;?>" size="80" placeholder="Type in an address"  />
+      <div class="map_canvas"></div>
             <div class="field"><strong>Address</strong><br />          
                     <span><?=$address;?></span>
                     </div>
