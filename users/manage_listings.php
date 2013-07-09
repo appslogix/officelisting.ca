@@ -1,27 +1,9 @@
-<?PHP
-require_once('../lib/connections/db.php');
-include('../lib/functions/functions.php');
-include('../lib/functions/ps_pagination.php');
 
-checkLogin('2');
-
-
-
-$getuser = getUserRecords($_SESSION['user_id']);
-
-$user_id = $getuser[0]['id'];
-?>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title><?=$getuser[0]['username'];?>'s Home Page.</title>
-</head>
-
-<body>
 	    <?php 
-		include('../lib/sections/user_main_nav.php');
+		$page_title = 'Manage Listigss';
+		include('../lib/sections/user_header.php');
 		?>
-        
+<div class="container">        
 	<?
 	  //Select all spaces and display paginated results
 		$sql = "SELECT * FROM spaces INNER JOIN buildings ON building_id = id WHERE spaces.user_id = $user_id"; 
@@ -30,23 +12,30 @@ $user_id = $getuser[0]['id'];
 		if ((mysql_num_rows($res)) > 0){
 		$pager = new PS_Pagination($conn, $sql, 10, 5, "");
 	  ?>
-		<p>There <?php if ($numRows != 1) { echo 'are';} else { echo 'is'; }?> <?=$numRows;?> <?php if ($numRows != 1) { echo 'spaces';} else { echo 'space'; }?>  on this site.</p>
-		<? if (!empty($message)){echo "<div class='message'>".$message."</div>";} ?>
+		<h3><?=$getuser[0]['username'];?>'s Office Listings</h3>
+        
+      
+      <? if (!empty($message)){echo "<div class='message'>".$message."</div>";} ?>
 		<? if (!empty($error)){echo "<div id='error'>".$error."</div>";} ?>
+		<p>There <?php if ($numRows != 1) { echo 'are';} else { echo 'is'; }?> <?=$numRows;?> <?php if ($numRows != 1) { echo 'spaces';} else { echo 'space'; }?>  to manage. </p>
         
-        <div align="right"><a href="list_space.php">List a space</a></div>
+		
         
-		<table width="100%" border="1" cellspacing="1" cellpadding="1">
+        
+        <div align="left"><a href="list_space.php" class="btn"><i class="icon-plus"></i> List Space</a></div>
+		<table class="table table-hover">
+        	<thead>
 			<tr>
-				<td>Address</td>
-                <td>Suite Number</td>
-                
-                <td>Square Footage</td>
-                <td>Lease Term</td>
-                <td>Monthly Rents</td>
-                <td>Status</td>
-                <td>Actions</td>
+            	<th>Suite Number</th>
+				<th>Address</th>
+                <th>Square Footage</th>
+                <th>Monthly Rents</th>
+                <th>Lease Term</th>
+                <th>Status</th>
+                <th>Actions</th>
 			</tr>
+            </thead>
+            <tbody>
 			<? 
 			   $countLoop = 0;
 			   $rs = $pager->paginate();
@@ -56,15 +45,16 @@ $user_id = $getuser[0]['id'];
 					 if($row['space_active'] == 0){$active = "<span style='color:#f40000;'>Suspended</span>";}
 			?>	
 			<tr>
+            	<td><?=$row['suite_number'];?></td>
 				<td><?=$row['address'];?> <?=$row['b.postal_code'];?></td>
-                <td><?=$row['suite_number'];?></td>
                 <td><?=$row['square_footage'].' sq-ft';?></td>
+                <td><span class="add-on">$</span><?=$row['monthly_rents'];?></td>
                 <td><?=$row['lease_term'];?></td>
-                <td><?='$'.$row['monthly_rents'];?></td>
                 <td><?=$active;?></td>
-                <td><a href="edit_space.php?id=<?=$row['space_id'];?>">Edit</a> | <a href="listing_actions_submit.php?id=<?=$row['space_id'];?>&action=delete">Delete</a> </td>
+                <td><a href="edit_space.php?id=<?=$row['space_id'];?>" class="btn btn-small"><i class="icon-pencil"></i> Edit</a> <a href="listing_actions_submit.php?id=<?=$row['space_id'];?>&action=delete" class="btn btn-small"><i class="icon-trash"></i> Delete</a> </td>
 			</tr>
 			<? $countLoop++; } ?>
+            </tbody>
 		</table>
 		<table>
 			<tr>
@@ -73,8 +63,9 @@ $user_id = $getuser[0]['id'];
 		</table>
 			<? } else {	echo "<fieldset><p>This account currently has no listings to manage!</p></fieldset>";} ?>
 
-            <?php
-	require_once('../lib/sections/footer.php');
+</div>        
+<?php
+	require_once('../lib/sections/user_footer.php');
 ?>
 </body>
 </html>

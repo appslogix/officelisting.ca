@@ -1,38 +1,14 @@
 <?PHP
 require_once('lib/connections/db.php');
 include('lib/functions/functions.php');
+
+$page_title = 'Password Reset';
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
-<head>
-	<title>Password Reset</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-	
-	<script type="text/javascript" src="js/jquery-1.6.2.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-		
-	<script type="text/javascript">
-		$(document).ready(function(){
-	
-			$('#passreset').submit(function(e) {
-				passreset();
-				e.preventDefault();	
-			});	
-		});
 
-	</script>
-
-</head>
-<body>
-	<?php 
-		include('./lib/sections/public_main_nav.php');
-	?>
-	<hr/>
+<?php 
+	include('./lib/sections/public_header.php');
+?>
+	<div class="container">
 	<p>Enter your email address below.</p>
 	<hr/>
 	  <div class="done"><H3>New password sent.</H3><p>Check your inbox / junk mail folder for a link to reset your password.</p></div><!--close done-->
@@ -55,8 +31,8 @@ include('lib/functions/functions.php');
 		</table>
 		</form>          
 	</div><!--close form-->
-    
-    <?php
+</div>    
+<?php
 	require_once('./lib/sections/footer.php');
 ?>  
 </body>

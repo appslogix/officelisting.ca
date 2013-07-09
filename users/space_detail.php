@@ -1,8 +1,7 @@
 <?PHP
-require_once('../lib/connections/db.php');
-include('../lib/functions/functions.php');
-
-checkLogin('2');
+	$page_title = 'Space Details';
+	include('../lib/sections/user_header.php');
+	
 
 if(isset($_GET['id'])){
 	if(is_numeric($_GET['id'])){
@@ -23,6 +22,7 @@ if(isset($_GET['id'])){
 				$phone_number = $row["phone_number"];
 				$monthly_rents = $row["monthly_rents"];
 				$space_active = $row["space_active"];
+				$space_image = $row['space_image'];
 			}
 		
 	}
@@ -41,73 +41,46 @@ if(isset($_GET['id'])){
  }
 
 ?>
+	<div class="container">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
-<head>
-	<title>Home Page</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-</head>
-<body>
-
-		<?php 
-		include('../lib/sections/user_main_nav.php');
-		?>
 	
-		<h3>Building Information</h3>
-            <div class="field"><strong>Address</strong><br />          
-                    <span><?=$address;?></span>
-                    </div>
-             <br /> 
-             <div class="field"><strong>Postal Code</strong><br />          
-                    <span><?=$postal_code;?></span>
-                    </div>
-                    			
-              <br />       
-             <div class="field"><strong>Description</strong><br />          
-                    <span><?=$building_description;?></span>
-                    </div>
-             <br />        
+		<h3>Suite <?=$suite_number;?></h3>
+        <p><a href="building_detail.php?id=<?=$building_id?>"><?=$address;?> <?=$postal_code;?></a></p>
+        <img class="img-polaroid" src="../users/uploads/spaces/<?=$space_image?>" width="600px"/>
+
             
-            
-            <h3>Office Space Information</h3>
-                        <div class="field"><strong>Suite Number</strong><br />          
-                    <span><?=$suite_number;?></span>
-                    </div>
-             <br /> 
-             <div class="field"><strong>Square Footage</strong><br />          
-                    <span><?=$square_footage;?></span>
-                    </div>
                     			
-              <br />       
-             <div class="field"><strong>Lease Term</strong><br />          
-                    <span><?=$lease_term;?></span>
-                    </div>
-             <br /> 
-              <div class="field"><strong>Space Description</strong><br />          
+                 
+             <div class="field">        
                     <span><?=$description;?></span>
                     </div>
-             <br /> 
+                    
+            <dl>
+             	<dt>Suite Number</dt>
+  				<dd><?=$suite_number;?></dd>
+             	<dt>Square Footage</dt>
+  				<dd><?=$square_footage;?></dd>
+             	<dt>Lease Term</dt>
+  				<dd><?=$lease_term;?></dd>             
+            </dl>      
+            
              
-             <h3>Other Office Spaces on same Building</h3>
+             <h3>Also available on building</h3>
              
              	
              
              
-             <table width="100%" border="1" cellspacing="1" cellpadding="1">
+             <table class="table table-hover">
+             <thead>
 			<tr>
-                <td>Suite Number</td>
-                <td>Square Footage</td>
-                <td>Lease Term</td>
-                <td>Monthly Rents</td>
-                <td>Status</td>
-                <td>Actions</td>
+                <th>Suite Number</th>
+                <th>Square Footage</th>
+                <th>Lease Term</th>
+                <th>Monthly Rents</th>
+                <th>Status</th>
+                <th>Actions</th>
 			</tr>
+            </thead>
              <?php
 			 	$sql = "SELECT * FROM spaces WHERE building_id = '$building_id' AND space_id != $space_id";
 				$res = mysql_query($sql);
@@ -124,7 +97,8 @@ if(isset($_GET['id'])){
 					 if($row['space_active'] == 0){$active = "<span style='color:#f40000;'>Suspended</span>";}
                      ?>
                 <td><?=$active;?></td>
-                <td><a href="space_detail.php?id=<?=$row['space_id'];?>">View Details</a></td>
+                <td>
+                <div class="btn-group"><a class="btn btn-small" href="add_favourite.php?space_id=<?=$row['space_id']?>"><i class="icon-ok"></i> Add favourite</a><a href="space_detail.php?id=<?=$row['space_id'];?>" class="btn btn-small">View details &raquo;</a></div></td>
 			</tr>
                     
                     <?php
@@ -134,8 +108,8 @@ if(isset($_GET['id'])){
 			 ?>
              </table>
             
-            
-    <?php
+   </div>         
+<?php
 	require_once('../lib/sections/footer.php');
 ?>  
 </body>

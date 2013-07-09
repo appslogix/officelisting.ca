@@ -1,36 +1,9 @@
-<?PHP
-require_once('../lib/connections/db.php');
-include('../lib/functions/functions.php');
-include('../lib/functions/ps_pagination.php');
 
-checkLogin('2');
-
-$message="";
-if(isset($_GET['message'])){
-	$message = strip_tags($_GET['message']);
-	}
-	
-$error="";
-if(isset($_GET['error'])){
-	$error = strip_tags($_GET['error']);
-	}
-
-$getuser = getUserRecords($_SESSION['user_id']);
-
-$user_id = $getuser[0]['id'];
-
-?>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title><?=$getuser[0]['username'];?>'s Favourites</title>
-</head>
-
-<body>
 	    <?php 
-		include('../lib/sections/user_main_nav.php');
+		$page_title = 'Manage Favourites';
+		include('../lib/sections/user_header.php');
 		?>
-        
+ <div class="container">       
         <? if (!empty($message)){echo "<div class='message'>".$message."</div>";} ?>
 		<? if (!empty($error)){echo "<div id='error'>".$error."</div>";} ?>
         
@@ -45,21 +18,25 @@ $user_id = $getuser[0]['id'];
       <h3><?=$getuser[0]['username'];?>'s Favourites</h3>
       
       
+      
 		<p>There <?php if ($numRows != 1) { echo 'are';} else { echo 'is'; }?> <?=$numRows;?> <?php if ($numRows != 1) { echo 'favourite spaces';} else { echo 'favourite space'; }?>  to manage.</p>
         
+        <div align="left"><a href="compare_space.php" class="btn">Compare</a></div>
         
-        
-        <table width="100%" border="1" cellspacing="1" cellpadding="1">
+        <table class="table table-hover">
+        	<thead>
 			<tr>
-				<td>Address</td>
-                <td>Suite Number</td>
-                
-                <td>Square Footage</td>
-                <td>Lease Term</td>
-                <td>Monthly Rents</td>
-                <td>Status</td>
-                <td>Actions</td>
+            	<th><input type="checkbox" /></th>
+            	<th>Suite Number</th>
+				<th>Address</th>
+                <th>Square Footage</th>
+                <th>Lease Term</th>
+                <th>Monthly Rents</th>
+                <th>Status</th>
+                <th>Actions</th>
 			</tr>
+            </thead>
+            <tbody>
 			<? 
 			   $countLoop = 0;
 			   $rs = $pager->paginate();
@@ -69,21 +46,26 @@ $user_id = $getuser[0]['id'];
 					 if($row['space_active'] == 0){$active = "<span style='color:#f40000;'>Suspended</span>";}
 			?>	
 			<tr>
-				<td><?=$row['address'];?> <?=$row['b.postal_code'];?></td>
-                <td><?=$row['suite_number'];?></td>
+            	<td><input type="checkbox" /></td>
+            	<td><a href="space_detail.php?id=<?=$row['space_id'];?>"><?=$row['suite_number'];?></a></td>
+				<td><a href="space_detail.php?id=<?=$row['space_id'];?>"><?=$row['address'];?> <?=$row['b.postal_code'];?></a></td>
+                
                 <td><?=$row['square_footage'].' sq-ft';?></td>
                 <td><?=$row['lease_term'];?></td>
                 <td><?='$'.$row['monthly_rents'];?></td>
                 <td><?=$active;?></td>
-                <td><a href="space_detail.php?id=<?=$row['space_id'];?>">View Details</a> | <a href="favourite_actions_submit.php?id=<?=$row['favourite_id'];?>&action=delete">Delete</a> </td>
+                <td>
+                    	<div class="btn-group">
+                            <a href="favourite_actions_submit.php?id=<?=$row['favourite_id'];?>&action=delete" class="btn btn-small"><i class="icon-remove"></i> Remove</a>  
+                        </div>
+                </td>
 			</tr>
 			<? $countLoop++; } ?>
+            </tbody>
 		</table>
-		<table>
-			<tr>
-				<td><?= $pager->renderFullNav();?></td>
-			<tr>
-		</table>
+		<div>
+		<?= $pager->renderFullNav();?>
+        </div>
         
         
         
@@ -91,10 +73,10 @@ $user_id = $getuser[0]['id'];
 	
         
         
-	
+</div>	
 
             <?php
-	require_once('../lib/sections/footer.php');
+	require_once('../lib/sections/user_footer.php');
 ?>
 </body>
 </html>

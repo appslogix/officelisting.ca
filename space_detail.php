@@ -1,8 +1,9 @@
 <?PHP
 require_once('./lib/connections/db.php');
 include('./lib/functions/functions.php');
+$page_title = 'Space Details';
 
-checkLogin('1');
+
 
 if(isset($_GET['id'])){
 	if(is_numeric($_GET['id'])){
@@ -42,23 +43,10 @@ if(isset($_GET['id'])){
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
-<head>
-	<title>Home Page</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-    
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-    <script src="./plugins/geocomplete/jquery.geocomplete.js"></script>
-    <script src="./plugins/geocomplete/examples/logger.js"></script>
-    
+<?php 
+include('./lib/sections/public_header.php');
+?>
     <script>
       $(function(){
       	$("#geocomplete").geocomplete({
@@ -78,14 +66,9 @@ if(isset($_GET['id'])){
       });
     </script>
     
-</head>
-<body>
 
-		<?php 
-		include('./lib/sections/public_main_nav.php');
-		?>
-	<hr/>
-		<h3>Building Information</h3>
+<div class="container">
+	<h3>Building Information</h3>
               <input id="geocomplete" type="hidden" name="address" value="<?=$address;?>" size="80" placeholder="Type in an address"  />
       <div class="map_canvas"></div>
             <div class="field"><strong>Address</strong><br />          
@@ -162,7 +145,7 @@ if(isset($_GET['id'])){
 			 ?>
              </table>
             
-            
+</div>            
     <?php
 	require_once('./lib/sections/footer.php');
 ?>  

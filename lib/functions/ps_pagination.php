@@ -118,9 +118,10 @@ class PS_Pagination {
 		if ($this->total_rows == 0)
 			return FALSE;
 		if ($this->turn == 1) {
+			$tag = "<span>First</span>";
 			return "$tag ";
 		} else {
-			return '<span class="current"><a href="' . $this->php_self . '?turn=1&' . $this->append . '">' . $tag . '</a></span> ';
+			return '<span class="active"><a href="' . $this->php_self . '?turn=1&' . $this->append . '">' . $tag . '</a></span> ';
 		}
 	}
 	
@@ -136,9 +137,10 @@ class PS_Pagination {
 			return FALSE;
 		
 		if ($this->turn == $this->max_pages) {
+			$tag = "<span>Last</span>";
 			return $tag;
 		} else {
-			return ' <span class="current"><a href="' . $this->php_self . '?turn=' . $this->max_pages . '&' . $this->append . '">' . $tag . '</a></span>';
+			return ' <span class="active"><a href="' . $this->php_self . '?turn=' . $this->max_pages . '&' . $this->append . '">' . $tag . '</a></span>';
 		}
 	}
 	
@@ -154,8 +156,9 @@ class PS_Pagination {
 			return FALSE;
 		
 		if ($this->turn < $this->max_pages) {
-			return '<span class="current"><a href="' . $this->php_self . '?turn=' . ($this->turn + 1) . '&' . $this->append . '">' . $tag . '</a></span>';
+			return '<span class="active"><a href="' . $this->php_self . '?turn=' . ($this->turn + 1) . '&' . $this->append . '">' . $tag . '</a></span>';
 		} else {
+			$tag = "<span>&gt;&gt;</span>";
 			return $tag;
 		}
 	}
@@ -172,8 +175,9 @@ class PS_Pagination {
 			return FALSE;
 		
 		if ($this->turn > 1) {
-			return ' <span class="current"><a href="' . $this->php_self . '?turn=' . ($this->turn - 1) . '&' . $this->append . '">' . $tag . '</a></span>';
+			return ' <span class="active"><a href="' . $this->php_self . '?turn=' . ($this->turn - 1) . '&' . $this->append . '">' . $tag . '</a></span>';
 		} else {
+			$tag = "<span>&lt;&lt;</span>";
 			return " $tag";
 		}
 	}
@@ -204,7 +208,7 @@ class PS_Pagination {
 			if ($i == $this->turn) {
 				$links .= $prefix . " $i " . $suffix;
 			} else {
-				$links .= ' ' . $prefix . '<span class="current"><a href="' . $this->php_self . '?turn=' . $i . '&' . $this->append . '">' . $i . '</a></span>' . $suffix . ' ';
+				$links .= ' ' . $prefix . '<a href="' . $this->php_self . '?turn=' . $i . '&' . $this->append . '">' . $i . '</a>' . $suffix . ' ';
 			}
 		}
 		
@@ -218,7 +222,7 @@ class PS_Pagination {
 	 * @return string
 	 */
 	function renderFullNav() {
-		return '<div class="pagination" align="center">' . $this->renderFirst() . '&nbsp;' . $this->renderPrev() . '&nbsp;' . $this->renderNav() . '&nbsp;' . $this->renderNext() . '&nbsp;' . $this->renderLast() . '</div>';
+		return '<div class="pagination">' . $this->renderFirst() . '&nbsp;' . $this->renderPrev() . '&nbsp;' . $this->renderNav() . '&nbsp;' . $this->renderNext() . '&nbsp;' . $this->renderLast() . '</div>';
 	}
 	
 	/**

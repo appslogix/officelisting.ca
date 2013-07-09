@@ -2,7 +2,6 @@
 DEFINE('INCLUDE_CHECK',1);
 require_once('lib/connections/db.php');
 include('lib/functions/functions.php');
-
 $sitesettings = getSiteSettings();	
 $site_url = $sitesettings[0]['site_url'];
 //For password recovery

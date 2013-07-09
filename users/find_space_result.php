@@ -1,12 +1,9 @@
 <?php
-	require_once('../lib/connections/db.php');
-	include('../lib/functions/functions.php');
+	include('../lib/sections/user_header.php');
 	
 	if (isset($_POST['findbuilding'])) {// Check if form has been submitted
 	
-	checkLogin('2');
 
-	$getuser = getUserRecords($_SESSION['user_id']);
 		
 		// Collect values into variables from form
 		$square_footage = $_POST['square_footage'];
@@ -63,30 +60,18 @@
 	}
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
-<head>
-	<title>Home Page</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
-</head>
-<body>
-
-		<?php 
-		include('../lib/sections/user_main_nav.php');
-		?>
+<div class="container">
 	<h3>Search Results</h3>
+    		<div id="map_canvas" style="width:100%; height:300px"></div>
+            <hr />
     
+<ul class="thumbnails">    
     <?php
 		//$sql = "SELECT * FROM spaces WHERE square_footage BETWEEN $min_sq_ft AND $max_sq_ft";
 		//$sql = "SELECT * FROM spaces INNER JOIN buildings ON spaces.building_id = buildings.id WHERE (square_footage, monthly_rents) BETWEEN ($min_sq_ft, $min_price) AND ($max_sq_ft, $max_price)";
 		//$sql ="SELECT * FROM spaces INNER JOIN buildings ON spaces.building_id = buildings.id WHERE square_footage >= $min_sq_ft AND square_footage <= $max_sq_ft";
 		//$sql = "SELECT * FROM spaces INNER JOIN buildings on spaces.building_id = building.id WHERE square_footage BETWEEN $min_sq_ft AND $max_sq_ft";
-		$sql = "SELECT * from spaces INNER JOIN buildings on spaces.building_id = buildings.id WHERE 
+		$sql = "SELECT * FROM spaces INNER JOIN buildings on spaces.building_id = buildings.id WHERE 
 		(square_footage >= $min_sq_ft) AND
 		(square_footage <= $max_sq_ft) AND
 		(monthly_rents >= $min_price) AND
@@ -97,23 +82,31 @@
 	while ($row = mysql_fetch_array($res)) {
 
 ?>
-<div>
-<p><img src="../images/spaces/<?=$row['image']?>" width="150"/><br />
-<?php
-	$address = $row['address'];
-?>
-<span><?=$address?></span><br />
-<span>Suite: <?=$row['suite_number']?></span><br />
-<span>Square Footage: <?=$row['square_footage']?></span><br />
-<span>Monthly Rents: <?=$row['monthly_rents']?></span><br />
-<a href="add_favourite.php?space_id=<?=$row['space_id']?>">Add Favourite</a> | <a href="space_detail.php?id=<?=$row['space_id']?>">View Details</a>
-</p>
-
-</div>
+    
+    <li class="span4">
+    	<div class="thumbnail">
+        	<a href="space_detail.php?id=<?=$row['space_id']?>"><img src="../users/uploads/spaces/<?=$row['space_image']?>" width="768px"/></a>
+            <h4><a href="building_detail.php?id=<?=$row['building_id']?>"><?=$row['address']?></a></h4>
+			<p>
+            	<span>Suite: <?=$row['suite_number']?></span><br />
+    			<span>Square Footage: <?=$row['square_footage']?></span><br />
+    			<span>Monthly Rents: <?=$row['monthly_rents']?></span><br />
+            </p>
+            <p>
+            	<a class="btn" href="add_favourite.php?space_id=<?=$row['space_id']?>">&#43; Add favourite</a>
+                <a class="btn" href="space_detail.php?id=<?=$row['space_id']?>">View details &raquo;</a> 
+				
+            </p>
+         </div>
+   
+    
+    </li>
 
 <?php
 }
 ?>
+
+</ul>
     
     
     <div>
@@ -121,10 +114,10 @@
 
     </div>
     
-    
+</div>    
     
     <?php
-	require_once('../lib/sections/footer.php');
+	require_once('../lib/sections/user_footer.php');
 ?>  
 </body>
 </html>

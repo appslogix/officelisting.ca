@@ -1,5 +1,5 @@
 .map_canvas { 
-  width: 600px; 
+  width: 100%; 
   height: 400px; 
   margin: 10px 20px 10px 0;
   float: none;
@@ -67,34 +67,44 @@
 	text-align:center;
 }
 
-/**********Pagination css**********/
-div.pagination {
-	padding: 3px;
-	margin: 3px;
+
+/* Pagination Class */
+.pagination {
+	margin: 0 !important;
 }
 
-div.pagination a {
-	padding: 2px 5px 2px 5px;
-	margin: 2px;
-	border: 1px solid #AAAADD;
-	text-decoration: none; /* no underline */
-	color: #000099;
+div.pagination  {
+	border-left: solid 1px #DDD;
+	height: 30px;
+
 }
-div.pagination a:hover, div.pagination a:active {
-	border: 1px solid #1a6a1a;
-	background-color:#1a6a1a;
-	color: #fff;
+
+.pagination span {
+	background: #FFF;
+  border-color:#DDDDDD;
+  border-style:solid;
+  border-width:1px 1px 1px 0;
+  float:left;
+  line-height:20px;
+  padding:4px 12px;
+  text-decoration:none;
 }
-div.pagination span.current {
-	padding: 2px 5px 2px 5px;
-	margin: 2px;
-	border: 1px solid #1a6a1a;
-	font-weight: bold;
-	background-color: #1a6a1a;
-	color: #FFF;
-	}
-div.pagination span.disabled {
-	padding: 2px 5px 2px 5px;
-	margin: 2px;
-	color: #000;
-	}
+
+
+
+
+
+
+div.pagination > span.disabled {
+}
+
+div.pagination > span.active {
+}
+
+div.pagination > span.disabled > a {
+}
+
+div.pagination > span.active > a {
+}
+
+

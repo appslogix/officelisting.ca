@@ -1,33 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
-<head>
-	<title>Contact Us.</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-	
-	<script type="text/javascript" src="js/jquery-1.6.2.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-		
-	<script type="text/javascript">
-		$(document).ready(function(){
-	
-			$('#contactForm').submit(function(e) {
-				contactus();
-				e.preventDefault();	
-			});	
-		});
-
-	</script>
-</head>
-<body>
-	<?php 
-		include('./lib/sections/public_main_nav.php');
-		?>
-	<hr/>
+<?php
+	$page_title = 'Contact us';
+	include('./lib/sections/public_header.php');
+?>
+<div class="container">
 		<h3 align="center">Contact Us</h3>
 			<div class="done"><H3>Thank you for your inquiry/comment.</H3> We will reply to you as soon as possible.</div><!--close done-->
 				<div class="form">
@@ -59,8 +34,8 @@
 						</table>
 					</form>
 				</div><!--close form-->
-                
-                <?php
+</div>                
+<?php
 	require_once('./lib/sections/footer.php');
 ?>  
 </body>

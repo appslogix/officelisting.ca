@@ -1,10 +1,5 @@
 <?PHP
-require_once('../lib/connections/db.php');
-include('../lib/functions/functions.php');
-
-checkLogin('2');
-$getuser = getUserRecords($_SESSION['user_id']);
-$user_id = $getuser[0]['id'];
+include('../lib/sections/user_header.php');
 
 if((isset($_GET['action'])) && ($_GET['action'] == 'update')){
 				$space_id = $_POST["space_id"];
@@ -67,35 +62,8 @@ if(isset($_GET['id'])){
 
 
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>Edit Building.</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
-	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-    <script src="./js/address_geocoder.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="../js/script.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-	
-			$('#editbuildingForm').submit(function(e) {
-				getbuilding();
-				e.preventDefault();	
-			});	
-		});
-	</script>
-</head>
 
-<body>
-	<?php include('../lib/sections/user_main_nav.php'); ?>
-    
+ <div class="container">   
 	<p>Edit Space</p>
 	
     <div class="done"><p>Space updated successfully.</p><p><a href="manage_spaces.php">Click here</a> to continue managing spaces.</p></div><!--close done-->
@@ -203,8 +171,9 @@ if(isset($_GET['id'])){
         
         
 	</div><!--close form-->
+</div>
 <?php
-	require_once('../lib/sections/footer.php');
+	require_once('../lib/sections/user_footer.php');
 ?>   
 </body>
 </html>

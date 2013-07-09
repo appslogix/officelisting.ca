@@ -1,8 +1,7 @@
 <?PHP
-	require_once('../lib/connections/db.php');
-	include('../lib/functions/functions.php');
-	checkLogin('2');
-	$getuser = getUserRecords($_SESSION['user_id']);
+	$page_title = 'List Space';
+	include('../lib/sections/user_header.php');
+	
 
 
 if (isset($_POST['step-3'])) {
@@ -34,37 +33,78 @@ if (isset($_POST['step-3'])) {
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
-<head>
-	<title>Home Page</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
-    
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-	<script src="../js/address_geocoder.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="../js/script.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-	
-			$('#addspaceForm').submit(function(e) {
-				addspace();
-				e.preventDefault();	
-			});	
-		});
-	</script>
-    
-</head>
-<body>
+<?php
+	 if (!isset($_GET['step']) || ($_GET['step'] == 1)) {
+?>
+    <script>
+      $(function(){
+        $("#geocomplete").geocomplete({
+          map: ".map_canvas",
+          details: "form",
+          types: ["geocode", "establishment"],
+        });
 
-		<?php 
-		include('../lib/sections/user_main_nav.php');
-		?>
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        });
+      });
+    </script>
+<?php
+	 }
+?>
+
+<?php
+	if (isset($_GET['step']) && (($_GET['step'] == 2)) ) {
+?>
+    <script>
+      $(function(){
+      	$("#geocomplete").geocomplete({
+          map: ".map_canvas",
+		  
+        });
+        
+        $("#geocomplete").geocomplete("find", "<?=$_POST['address'];?>");
+        
+        $("#center").click(function(){
+          var map = $("#geocomplete").geocomplete("map"),
+            center = new google.maps.LatLng(10, 0);
+          
+          map.setCenter(center);
+          map.setZoom(3);
+        });
+      });
+    </script>
+<?php
+	 }
+?>
+
+<?php
+	if (isset($_GET['step']) && (($_GET['step'] == 3)) ) {
+?>
+    <script>
+      $(function(){
+      	$("#geocomplete").geocomplete({
+          map: ".map_canvas",
+		  
+        });
+        
+        $("#geocomplete").geocomplete("find", "<?=$_POST['address'];?>");
+        
+        $("#center").click(function(){
+          var map = $("#geocomplete").geocomplete("map"),
+            center = new google.maps.LatLng(10, 0);
+          
+          map.setCenter(center);
+          map.setZoom(3);
+        });
+      });
+    </script>
+<?php
+	 }
+?>
+    
+
+<div class="container">
 	
 	<h3>List Space</h3>
     
@@ -84,18 +124,10 @@ if (isset($_POST['step-3'])) {
     
         
             <fieldset><legend>Step 1. Find the Building Location.</legend>
-                
-                <div class="field">
-                    <label for="address"><strong>Address</strong></label><br>
-                    <input id="address" type="text" name="address" placeholder="Enter a location" autocomplete="off" size="87" <?php if (isset($_POST['address'])) { print 'value="'.$_POST['address'].'"'; }?>>
-                </div>
-                    
-            	<br clear="all" />
-            
-                <div class="field">
-                    <input type="submit" value="Find"  name="findbuilding" />
-                    <img id="loading" src="../images/loading.gif" alt="Updating.." />
-                </div>
+                <div class="input-append">
+                <input id="geocomplete" class="span5" type="text" name="address" placeholder="Type in the address" autocomplete="off"  value="<?php if (isset($_POST['address'])) { print $_POST['address']; }?>"> <button class="btn" type="submit" value="Submit"  name="findbuilding">Search</button>
+                  </div>  
+            	<div class="map_canvas"></div>
             
             
             </fieldset>
@@ -286,10 +318,10 @@ if (isset($_POST['step-3'])) {
     
     </div>
     
-    
+</div>    
     
     <?php
-	require_once('../lib/sections/footer.php');
+	require_once('../lib/sections/user_footer.php');
 ?>  
 </body>
 </html>
