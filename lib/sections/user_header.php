@@ -111,6 +111,17 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="../plugins/geocomplete/jquery.geocomplete.js"></script>
     <script src="../plugins/geocomplete/examples/logger.js"></script>
+    <script type="text/javascript" src="../js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="../js/footable.js"></script>
+    <script type="text/javascript">
+		$(function() {
+		  $('table').footable();
+		});
+  	</script>
+    <script type="text/javascript">
+	
+	</script>
+    
 	<script type="text/javascript" src="../js/script.js"></script>
     <script type="text/javascript">
 		$(document).ready(function(){

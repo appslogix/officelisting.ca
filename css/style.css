@@ -90,21 +90,7 @@ div.pagination  {
   text-decoration:none;
 }
 
+/* Modification to accomodate Masonry */
 
-
-
-
-
-div.pagination > span.disabled {
-}
-
-div.pagination > span.active {
-}
-
-div.pagination > span.disabled > a {
-}
-
-div.pagination > span.active > a {
-}
 
 

@@ -46,6 +46,7 @@ if(isset($_GET['id'])){
 	
 		<h3>Suite <?=$suite_number;?></h3>
         <p><a href="building_detail.php?id=<?=$building_id?>"><?=$address;?> <?=$postal_code;?></a></p>
+        <hr />
         <img class="img-polaroid" src="../users/uploads/spaces/<?=$space_image?>" width="600px"/>
 
             
@@ -70,17 +71,18 @@ if(isset($_GET['id'])){
              	
              
              
-             <table class="table table-hover">
+             <table class="table table-hover footable">
              <thead>
 			<tr>
-                <th>Suite Number</th>
-                <th>Square Footage</th>
-                <th>Lease Term</th>
+                <th data-class="expand">Suite Number</th>
+                <th data-hide="phone">Square Footage</th>
+                <th data-hide="phone">Lease Term</th>
                 <th>Monthly Rents</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th data-hide="phone">Status</th>
+                <th data-hide="phone">Actions</th>
 			</tr>
             </thead>
+            <tbody>
              <?php
 			 	$sql = "SELECT * FROM spaces WHERE building_id = '$building_id' AND space_id != $space_id";
 				$res = mysql_query($sql);
@@ -106,6 +108,7 @@ if(isset($_GET['id'])){
 				 
 			 
 			 ?>
+             </tbody>
              </table>
             
    </div>         

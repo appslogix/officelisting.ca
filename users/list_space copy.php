@@ -33,7 +33,76 @@ if (isset($_POST['step-3'])) {
 
 ?>
 
+<?php
+	 if (!isset($_GET['step']) || ($_GET['step'] == 1)) {
+?>
+    <script>
+      $(function(){
+        $("#geocomplete").geocomplete({
+          map: ".map_canvas",
+          details: "form",
+          types: ["geocode", "establishment"],
+        });
 
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        });
+      });
+    </script>
+<?php
+	 }
+?>
+
+<?php
+	if (isset($_GET['step']) && (($_GET['step'] == 2)) ) {
+?>
+    <script>
+      $(function(){
+      	$("#geocomplete").geocomplete({
+          map: ".map_canvas",
+		  
+        });
+        
+        $("#geocomplete").geocomplete("find", "<?=$_POST['address'];?>");
+        
+        $("#center").click(function(){
+          var map = $("#geocomplete").geocomplete("map"),
+            center = new google.maps.LatLng(10, 0);
+          
+          map.setCenter(center);
+          map.setZoom(3);
+        });
+      });
+    </script>
+<?php
+	 }
+?>
+
+<?php
+	if (isset($_GET['step']) && (($_GET['step'] == 3)) ) {
+?>
+    <script>
+      $(function(){
+      	$("#geocomplete").geocomplete({
+          map: ".map_canvas",
+		  
+        });
+        
+        $("#geocomplete").geocomplete("find", "<?=$_POST['address'];?>");
+        
+        $("#center").click(function(){
+          var map = $("#geocomplete").geocomplete("map"),
+            center = new google.maps.LatLng(10, 0);
+          
+          map.setCenter(center);
+          map.setZoom(3);
+        });
+      });
+    </script>
+<?php
+	 }
+?>
+    
 
 <div class="container">
 	
@@ -55,13 +124,11 @@ if (isset($_POST['step-3'])) {
     
         
             <fieldset><legend>Step 1. Find the Building Location.</legend>
-            <hr />
-            <div id="map_canvas" style="width:100%; height:300px;"></div>
-                <div class="input-append" style="position: absolute; z-index: 999; width: 100%; display:block; top: 250px; text-align: center">
+                <div class="input-append">
                 <input id="geocomplete" class="span5" type="text" name="address" placeholder="Type in the address" autocomplete="off"  value="<?php if (isset($_POST['address'])) { print $_POST['address']; }?>"> <button class="btn" type="submit" value="Submit"  name="findbuilding">Search</button>
                   </div>  
-            	
-             <hr />
+            	<div class="map_canvas"></div>
+            
             
             </fieldset>
     
